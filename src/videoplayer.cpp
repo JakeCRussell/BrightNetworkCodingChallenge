@@ -8,7 +8,7 @@
 
 std::string nowPlaying = "";
 bool paused = false;
-std::vector<VideoPlaylist> playlists;
+std::vector<std::string> playlists;
 
 void VideoPlayer::numberOfVideos() {
   std::cout << mVideoLibrary.getVideos().size() << " videos in the library"
@@ -140,33 +140,71 @@ void VideoPlayer::createPlaylist(const std::string& playlistName) {
     //std::string name = playlistName;
     //VideoPlaylist list = VideoPlaylist(name);
     //playlists.push_back(list);
-   // std::cout << "Successfully created new playlist: " << name << std::endl;
+    if (std::find(playlists.begin(), playlists.end(), playlistName) != playlists.end())
+    {
+        std::cout << "Cannot create playlist: A playlist with the same name already exists" << std::endl;
+    }
+    else {
+        std::cout << "Successfully created new playlist: " << playlistName << std::endl;
+        playlists.push_back(playlistName);
+    }
+    
 }
 
 void VideoPlayer::addVideoToPlaylist(const std::string& playlistName,
                                      const std::string& videoId) {
-  std::cout << "addVideoToPlaylist needs implementation" << std::endl;
+    if (std::find(playlists.begin(), playlists.end(), playlistName ) != playlists.end())
+    {
+        std::cout << "Cannot add video to " << playlistName << ": Video does not exist" << std::endl;
+    }
+    else {
+        std::cout << "Cannot add video to " << playlistName << ": Playlist does not exist" << std::endl;
+    }
+  
 }
 
 void VideoPlayer::showAllPlaylists() {
-  std::cout << "showAllPlaylists needs implementation" << std::endl;
+    if (playlists.empty()) {
+        std::cout << "No playlists exist yet" << std::endl;
+    }
+    else {
+        std::cout << "Showing all playlists:" << std::endl;
+        for (unsigned i = 0; i < playlists.size(); i++) {
+            std::cout << playlists[i] << std::endl;
+        }
+    }
+  
 }
 
 void VideoPlayer::showPlaylist(const std::string& playlistName) {
-  std::cout << "showPlaylist needs implementation" << std::endl;
+  std::cout << "Cannot show playlist " << playlistName << ": Playlist does not exist" << std::endl;
 }
 
 void VideoPlayer::removeFromPlaylist(const std::string& playlistName,
                                      const std::string& videoId) {
-  std::cout << "removeFromPlaylist needs implementation" << std::endl;
+    const auto* video = mVideoLibrary.getVideo(videoId);
+
+    if (video == nullptr) {
+        std::cout << "Cannot remove video from " << playlistName << ": Video does not exist" << std::endl;
+        return;
+    }
+
+  std::cout << "Cannot remove video from " << playlistName << ": Playlist does not exist" << std::endl;
 }
 
 void VideoPlayer::clearPlaylist(const std::string& playlistName) {
   std::cout << "clearPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::deletePlaylist(const std::string& playlistName) {
-  std::cout << "deletePlaylist needs implementation" << std::endl;
+void VideoPlayer::deletePlaylist(const std::string& playlistName) {       
+        auto itr = std::find(playlists.begin(), playlists.end(), playlistName);
+        if (itr != playlists.end()) {
+            playlists.erase(itr);
+            std::cout << "Deleted playlist: " << playlistName << std::endl;
+        }
+        else {
+            std::cout << "Cannot delete playlist " << playlistName << ": Playlist does not exist" << std::endl;
+        }
 }
 
 void VideoPlayer::searchVideos(const std::string& searchTerm) {
