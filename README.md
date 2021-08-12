@@ -5,4 +5,4 @@ I haven't completed every task, and I'm not even sure if the tests pass for the 
 
 I fancied a challenge and tried using C++, a language I've never used before, to attempt this. Given that, the limited time, and being out of practice anyway, I am pretty happy with getting as far as I did.
 
-I am incredibly greatful for the opportunity to participate in the BrightNetwork internship experience on demand, and very much appreciate all the effort that went in to making the experience what it was. A huge thank you to everyone who took part.
+I am incredibly grateful for the opportunity to participate in the BrightNetwork internship experience on demand, and very much appreciate all the effort that went in to making the experience what it was. A huge thank you to everyone who took part.
